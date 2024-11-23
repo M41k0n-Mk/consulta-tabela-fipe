@@ -13,7 +13,7 @@ public class Main {
         Scanner leitura = new Scanner(System.in);
         String vehicleType = leitura.nextLine();
 
-        VehicleAPI strategy = new GenericVehicleAPI(VehicleType.fromString(vehicleType));
+        VehicleAPI strategy = new GenericVehicleAPI(VehicleType.fromString(InputSanitizer.sanitize(vehicleType)));
         VehicleContext context = new VehicleContext(strategy);
         System.out.println(context.getData());
     }
