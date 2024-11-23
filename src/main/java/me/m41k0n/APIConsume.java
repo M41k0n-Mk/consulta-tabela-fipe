@@ -7,8 +7,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class APIConsume {
+    private final HttpClient client;
+
+    public APIConsume(HttpClient client) {
+        this.client = client;
+    }
+
     public String getData(String url) {
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
