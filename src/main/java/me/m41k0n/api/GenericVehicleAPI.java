@@ -2,6 +2,8 @@ package me.m41k0n.api;
 
 import me.m41k0n.APIConsume;
 import me.m41k0n.enums.VehicleType;
+import me.m41k0n.exception.CustomIOException;
+import me.m41k0n.exception.CustomInterruptedException;
 
 import java.net.http.HttpClient;
 
@@ -13,7 +15,7 @@ public class GenericVehicleAPI implements VehicleAPI {
     }
 
     @Override
-    public String getData() {
+    public String getData() throws CustomInterruptedException, CustomIOException {
         HttpClient httpClient = HttpClient.newHttpClient();
         APIConsume apiConsume = new APIConsume(httpClient);
         String baseUrl = "https://parallelum.com.br/fipe/api/v1/";
