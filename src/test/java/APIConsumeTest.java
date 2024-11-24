@@ -1,4 +1,6 @@
 import me.m41k0n.APIConsume;
+import me.m41k0n.exception.CustomIOException;
+import me.m41k0n.exception.CustomInterruptedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,7 +31,7 @@ public class APIConsumeTest {
     private APIConsume apiConsume;
 
     @Test
-    public void shouldMakeRequestAndReturnDataSuccessfully() throws IOException, InterruptedException {
+    public void shouldMakeRequestAndReturnDataSuccessfully() throws IOException, InterruptedException, CustomInterruptedException, CustomIOException {
         String expectedResponse = "response body";
         when(mockHttpResponse.body()).thenReturn(expectedResponse);
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(mockHttpResponse);
@@ -41,18 +43,20 @@ public class APIConsumeTest {
     }
 
     @Test
-    public void ItShouldThrowRuntimeExceptionWhenSendMethodThrowsIOException() throws IOException, InterruptedException {
+    public void ItShouldThrowCustomIOExceptionWhenSendMethodThrowsIOException() throws IOException, InterruptedException {
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenThrow(new IOException());
 
-        assertThrows(RuntimeException.class, () -> apiConsume.getData("http://teste.com"));
+        CustomIOException e = assertThrows(CustomIOException.class, () -> apiConsume.getData("http://teste.com"));
+        assertEquals("A requisição HTTP falhou", e.getMessage());
     }
 
     @Test
-    public void ItShouldThrowRuntimeExceptionWhenSendMethodThrowsInterruptedException() throws IOException, InterruptedException {
+    public void ItShouldThrowCustomInterruptedExceptionWhenSendMethodThrowsInterruptedException() throws IOException, InterruptedException {
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenThrow(new InterruptedException());
 
-        assertThrows(RuntimeException.class, () -> apiConsume.getData("http://teste.com"));
+        CustomInterruptedException e = assertThrows(CustomInterruptedException.class, () -> apiConsume.getData("http://teste.com"));
+        assertEquals("A thread foi interrompida durante a request HTTP", e.getMessage());
     }
 }
