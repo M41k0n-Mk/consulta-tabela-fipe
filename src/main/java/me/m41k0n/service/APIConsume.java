@@ -1,4 +1,4 @@
-package me.m41k0n;
+package me.m41k0n.service;
 
 import me.m41k0n.exception.CustomIOException;
 import me.m41k0n.exception.CustomInterruptedException;

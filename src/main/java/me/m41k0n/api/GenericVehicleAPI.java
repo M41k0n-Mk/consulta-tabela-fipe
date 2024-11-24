@@ -1,6 +1,6 @@
 package me.m41k0n.api;
 
-import me.m41k0n.APIConsume;
+import me.m41k0n.service.APIConsume;
 import me.m41k0n.enums.VehicleType;
 import me.m41k0n.exception.CustomIOException;
 import me.m41k0n.exception.CustomInterruptedException;

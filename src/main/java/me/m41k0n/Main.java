@@ -6,6 +6,7 @@ import me.m41k0n.context.VehicleContext;
 import me.m41k0n.enums.VehicleType;
 import me.m41k0n.exception.CustomIOException;
 import me.m41k0n.exception.CustomInterruptedException;
+import me.m41k0n.utils.InputSanitizer;
 
 import java.util.Scanner;
 

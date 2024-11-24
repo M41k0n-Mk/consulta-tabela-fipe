@@ -1,4 +1,4 @@
-package me.m41k0n;
+package me.m41k0n.utils;
 
 import java.util.Locale;
 

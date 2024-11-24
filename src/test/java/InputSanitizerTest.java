@@ -1,4 +1,4 @@
-import me.m41k0n.InputSanitizer;
+import me.m41k0n.utils.InputSanitizer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

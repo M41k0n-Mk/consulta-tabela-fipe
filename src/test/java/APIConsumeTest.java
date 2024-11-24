@@ -1,4 +1,4 @@
-import me.m41k0n.APIConsume;
+import me.m41k0n.service.APIConsume;
 import me.m41k0n.exception.CustomIOException;
 import me.m41k0n.exception.CustomInterruptedException;
 import org.junit.jupiter.api.Test;
