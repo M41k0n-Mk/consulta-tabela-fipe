@@ -19,20 +19,26 @@ public class GenericVehicleAPI implements VehicleAPI {
     }
 
     @Override
-    public String getType() throws CustomInterruptedException, CustomIOException {
+    public String getBrandList() throws CustomInterruptedException, CustomIOException {
         String url = baseUrl + vehicleType.getType() + "/marcas";
         return apiConsume.getData(url);
     }
 
     @Override
-    public String getModel(String modelId) throws CustomInterruptedException, CustomIOException {
-        String url = baseUrl + vehicleType.getType() + "/marcas/" + modelId + "/modelos";
+    public String getModel(String brandCode) throws CustomInterruptedException, CustomIOException {
+        String url = baseUrl + vehicleType.getType() + "/marcas/" + brandCode + "/modelos";
         return apiConsume.getData(url);
     }
 
     @Override
-    public String getYear(String modelId, String vehicleYear) throws CustomInterruptedException, CustomIOException {
-        String url = baseUrl + vehicleType.getType() + "/marcas/" + modelId + "/modelos/" + vehicleYear + "/anos";
+    public String getYear(String brandCode, String modelCode) throws CustomInterruptedException, CustomIOException {
+        String url = baseUrl + vehicleType.getType() + "/marcas/" + brandCode + "/modelos/" + modelCode + "/anos";
+        return apiConsume.getData(url);
+    }
+
+    @Override
+    public String getTableFipeData(String brandCode, String modelCode, String yearCode) throws CustomInterruptedException, CustomIOException {
+        String url = baseUrl + vehicleType.getType() + "/marcas/" + brandCode + "/modelos/" + modelCode + "/anos/" + yearCode;
         return apiConsume.getData(url);
     }
 }
