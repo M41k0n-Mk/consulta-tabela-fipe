@@ -11,15 +11,19 @@ public class VehicleContext {
         this.strategy = strategy;
     }
 
-    public String getType() throws CustomInterruptedException, CustomIOException {
-        return strategy.getType();
+    public String getBrandList() throws CustomInterruptedException, CustomIOException {
+        return strategy.getBrandList();
     }
 
-    public String getModel(String modelId) throws CustomInterruptedException, CustomIOException {
-        return strategy.getModel(modelId);
+    public String getModel(String brandCode) throws CustomInterruptedException, CustomIOException {
+        return strategy.getModel(brandCode);
     }
 
-    public String getYear(String modelId, String vehicleYear) throws CustomInterruptedException, CustomIOException {
-        return strategy.getYear(modelId, vehicleYear);
+    public String getYear(String brandCode, String modelCode) throws CustomInterruptedException, CustomIOException {
+        return strategy.getYear(brandCode, modelCode);
+    }
+
+    public String getTableFipeData(String brandCode, String modelCode, String yearCode) throws CustomInterruptedException, CustomIOException {
+        return strategy.getTableFipeData(brandCode, modelCode, yearCode);
     }
 }
