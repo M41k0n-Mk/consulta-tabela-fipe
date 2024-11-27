@@ -8,6 +8,7 @@ import me.m41k0n.enums.VehicleType;
 import me.m41k0n.exception.CustomIOException;
 import me.m41k0n.exception.CustomInterruptedException;
 import me.m41k0n.exception.CustomJsonProcessingException;
+import me.m41k0n.model.Model;
 import me.m41k0n.model.Vehicle;
 import me.m41k0n.service.ModelMapper;
 import me.m41k0n.utils.InputSanitizer;
@@ -31,8 +32,16 @@ public class Main {
                 VehicleAPI strategy = new GenericVehicleAPI(VehicleType.fromString(InputSanitizer.sanitize(vehicleType)));
                 VehicleContext context = new VehicleContext(strategy);
 
-                List<Vehicle> vehicles = modelMapper.jsonToModel(context.getData(), new TypeReference<>() {});
+                List<Vehicle> vehicles = modelMapper.jsonToModel(context.getType(), new TypeReference<>() {
+                });
                 System.out.println(vehicles);
+
+                System.out.println("Escolha o modelo do seu veículo:");
+                String modelVehicle = leitura.nextLine();
+
+                Model modelVehicles = modelMapper.jsonToModel(context.getModel(modelVehicle), new TypeReference<>() {
+                });
+                System.out.println(modelVehicles);
             } catch (CustomInterruptedException | CustomIOException | CustomJsonProcessingException
                      | IllegalArgumentException e) {
                 System.out.println("A aplicação teve um erro inesperado " + e + " Tente buscar o tipo do seu veículo novamente");
