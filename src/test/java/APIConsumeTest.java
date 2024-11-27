@@ -18,6 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.never;
 
 @ExtendWith(MockitoExtension.class)
 public class APIConsumeTest {
@@ -40,6 +41,7 @@ public class APIConsumeTest {
 
         assertEquals(expectedResponse, actualResponse);
         verify(mockHttpClient, times(1)).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
+        verify(mockHttpResponse, times(1)).body();
     }
 
     @Test
@@ -49,6 +51,8 @@ public class APIConsumeTest {
 
         CustomIOException e = assertThrows(CustomIOException.class, () -> apiConsume.getData("http://teste.com"));
         assertEquals("A requisição HTTP falhou", e.getMessage());
+        verify(mockHttpClient, times(1)).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
+        verify(mockHttpResponse, never()).body();
     }
 
     @Test
@@ -58,5 +62,7 @@ public class APIConsumeTest {
 
         CustomInterruptedException e = assertThrows(CustomInterruptedException.class, () -> apiConsume.getData("http://teste.com"));
         assertEquals("A thread foi interrompida durante a request HTTP", e.getMessage());
+        verify(mockHttpClient, times(1)).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
+        verify(mockHttpResponse, never()).body();
     }
 }
