@@ -16,7 +16,7 @@ public class VehicleTypeTest {
     }
 
     @Test
-    public void testThrowsExceptionWhenVehicleTypeNotExists() {
+    public void testIfThrowsExceptionWhenVehicleTypeNotExists() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> VehicleType.fromString("bicicletas"));
 
         assertEquals("Tipo de veículo inválido: bicicletas", exception.getMessage());

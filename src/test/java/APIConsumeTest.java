@@ -32,7 +32,7 @@ public class APIConsumeTest {
     private APIConsume apiConsume;
 
     @Test
-    public void shouldMakeRequestAndReturnDataSuccessfully() throws IOException, InterruptedException, CustomInterruptedException, CustomIOException {
+    public void itShouldMakeRequestAndReturnDataSuccessfully() throws IOException, InterruptedException, CustomInterruptedException, CustomIOException {
         String expectedResponse = "response body";
         when(mockHttpResponse.body()).thenReturn(expectedResponse);
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(mockHttpResponse);
