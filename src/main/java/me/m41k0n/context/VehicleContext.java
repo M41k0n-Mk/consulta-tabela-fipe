@@ -11,7 +11,11 @@ public class VehicleContext {
         this.strategy = strategy;
     }
 
-    public String getData() throws CustomInterruptedException, CustomIOException {
-        return strategy.getData();
+    public String getType() throws CustomInterruptedException, CustomIOException {
+        return strategy.getType();
+    }
+
+    public String getModel(String id) throws CustomInterruptedException, CustomIOException {
+        return strategy.getModel(id);
     }
 }
