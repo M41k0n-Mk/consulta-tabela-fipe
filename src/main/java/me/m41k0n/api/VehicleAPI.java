@@ -6,5 +6,7 @@ import me.m41k0n.exception.CustomInterruptedException;
 public interface VehicleAPI {
     String getType() throws CustomInterruptedException, CustomIOException;
 
-    String getModel(String id) throws CustomInterruptedException, CustomIOException;
+    String getModel(String modelId) throws CustomInterruptedException, CustomIOException;
+
+    String getYear(String modelId, String vehicleYear) throws CustomInterruptedException, CustomIOException;
 }

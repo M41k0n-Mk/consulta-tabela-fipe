@@ -7,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class InputSanitizerTest {
     @Test
-    void deveriaRetornarStringSemEspacoEmBranco() {
+    void ItShouldReturnStringWithoutWhitespace() {
         Assertions.assertEquals("carros", InputSanitizer.sanitize(" carros "));
     }
 }

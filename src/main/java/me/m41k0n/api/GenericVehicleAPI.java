@@ -25,8 +25,14 @@ public class GenericVehicleAPI implements VehicleAPI {
     }
 
     @Override
-    public String getModel(String id) throws CustomInterruptedException, CustomIOException {
-        String url = baseUrl + vehicleType.getType() + "/marcas/" + id + "/modelos";
+    public String getModel(String modelId) throws CustomInterruptedException, CustomIOException {
+        String url = baseUrl + vehicleType.getType() + "/marcas/" + modelId + "/modelos";
+        return apiConsume.getData(url);
+    }
+
+    @Override
+    public String getYear(String modelId, String vehicleYear) throws CustomInterruptedException, CustomIOException {
+        String url = baseUrl + vehicleType.getType() + "/marcas/" + modelId + "/modelos/" + vehicleYear + "/anos";
         return apiConsume.getData(url);
     }
 }
