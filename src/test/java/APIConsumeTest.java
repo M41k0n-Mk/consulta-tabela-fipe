@@ -1,6 +1,4 @@
 import me.m41k0n.service.APIConsume;
-import me.m41k0n.exception.CustomIOException;
-import me.m41k0n.exception.CustomInterruptedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +30,7 @@ public class APIConsumeTest {
     private APIConsume apiConsume;
 
     @Test
-    public void itShouldMakeRequestAndReturnDataSuccessfully() throws IOException, InterruptedException, CustomInterruptedException, CustomIOException {
+    public void itShouldMakeRequestAndReturnDataSuccessfully() throws IOException, InterruptedException {
         String expectedResponse = "response body";
         when(mockHttpResponse.body()).thenReturn(expectedResponse);
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(mockHttpResponse);
@@ -49,19 +47,8 @@ public class APIConsumeTest {
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenThrow(new IOException());
 
-        CustomIOException e = assertThrows(CustomIOException.class, () -> apiConsume.getData("http://teste.com"));
+        RuntimeException e = assertThrows(RuntimeException.class, () -> apiConsume.getData("http://teste.com"));
         assertEquals("A requisição HTTP falhou", e.getMessage());
-        verify(mockHttpClient, times(1)).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
-        verify(mockHttpResponse, never()).body();
-    }
-
-    @Test
-    public void ItShouldThrowCustomInterruptedExceptionWhenSendMethodThrowsInterruptedException() throws IOException, InterruptedException {
-        when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
-                .thenThrow(new InterruptedException());
-
-        CustomInterruptedException e = assertThrows(CustomInterruptedException.class, () -> apiConsume.getData("http://teste.com"));
-        assertEquals("A thread foi interrompida durante a request HTTP", e.getMessage());
         verify(mockHttpClient, times(1)).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
         verify(mockHttpResponse, never()).body();
     }

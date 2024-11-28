@@ -5,10 +5,6 @@ import me.m41k0n.api.GenericVehicleAPI;
 import me.m41k0n.api.VehicleAPI;
 import me.m41k0n.context.VehicleContext;
 import me.m41k0n.enums.VehicleType;
-import me.m41k0n.exception.CustomIOException;
-import me.m41k0n.exception.CustomInterruptedException;
-import me.m41k0n.exception.CustomJsonProcessingException;
-import me.m41k0n.model.FipeTableData;
 import me.m41k0n.model.Model;
 import me.m41k0n.model.Vehicle;
 import me.m41k0n.model.Year;
@@ -50,16 +46,13 @@ public class Main {
 
                 List<Year> vehicleYearList = modelMapper.jsonToModel(context.getYear(vehicleBrandCode, vehicleModelCode), new TypeReference<>() {
                 });
-                System.out.println(vehicleYearList);
 
-                System.out.println("Escolha o código ano do modelo do seu veículo:");
-                String vehicleYearCode = leitura.nextLine();
-
-                FipeTableData fipeTableData = modelMapper.jsonToModel(context.getTableFipeData(vehicleBrandCode, vehicleModelCode, vehicleYearCode), new TypeReference<>() {
-                });
-                System.out.println(fipeTableData);
-            } catch (CustomInterruptedException | CustomIOException | CustomJsonProcessingException
-                     | IllegalArgumentException e) {
+                vehicleYearList.stream()
+                        .map(Year::code)
+                        .map(code -> modelMapper.jsonToModel(context.getTableFipeData(vehicleBrandCode, vehicleModelCode, code),
+                                new TypeReference<>() {
+                                })).forEach(System.out::println);
+            } catch (RuntimeException e) {
                 System.out.println("A aplicação teve um erro inesperado " + e + " Tente buscar o tipo do seu veículo novamente");
             }
         }
