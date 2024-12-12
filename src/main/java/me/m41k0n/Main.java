@@ -5,12 +5,14 @@ import me.m41k0n.api.GenericVehicleAPI;
 import me.m41k0n.api.VehicleAPI;
 import me.m41k0n.context.VehicleContext;
 import me.m41k0n.enums.VehicleType;
+import me.m41k0n.model.Info;
 import me.m41k0n.model.Model;
 import me.m41k0n.model.Vehicle;
 import me.m41k0n.model.Year;
 import me.m41k0n.service.ModelMapper;
 import me.m41k0n.utils.InputSanitizer;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,29 +22,39 @@ public class Main {
 
         while (true) {
             System.out.println("Escolha o tipo do seu veículo(carros, caminhões ou motos) ou digite sair para sair da aplicação:");
-            Scanner leitura = new Scanner(System.in);
-            String vehicleType = leitura.nextLine();
+            var leitura = new Scanner(System.in);
+            var vehicleType = leitura.nextLine();
 
             if (vehicleType.equals("sair"))
                 break;
 
             try {
                 VehicleAPI strategy = new GenericVehicleAPI(VehicleType.fromString(InputSanitizer.sanitize(vehicleType)));
-                VehicleContext context = new VehicleContext(strategy);
+                var context = new VehicleContext(strategy);
 
                 List<Vehicle> vehiclesBrandList = modelMapper.jsonToModel(context.getBrandList(), new TypeReference<>() {
                 });
-                System.out.println(vehiclesBrandList);
+                vehiclesBrandList.stream().sorted(Comparator.comparing(Vehicle::code)).forEach(System.out::println);
 
                 System.out.println("Escolha o código da marca do seu veículo:");
-                String vehicleBrandCode = leitura.nextLine();
+                var vehicleBrandCode = leitura.nextLine();
 
                 Model vehicleModel = modelMapper.jsonToModel(context.getModel(vehicleBrandCode), new TypeReference<>() {
                 });
-                System.out.println(vehicleModel);
+                vehicleModel.models().stream().sorted(Comparator.comparing(Info::code)).forEach(System.out::println);
+
+                System.out.println("Digite um trecho do nome do veículo a ser buscado");
+                var vehicleName = leitura.nextLine();
+
+                List<Info> filteredModels = vehicleModel.models().stream()
+                        .filter(m -> m.name().toLowerCase().contains(vehicleName.toLowerCase()))
+                        .toList();
+
+                System.out.println("Modelos filtrados");
+                filteredModels.forEach(System.out::println);
 
                 System.out.println("Escolha o código do modelo do seu veículo:");
-                String vehicleModelCode = leitura.nextLine();
+                var vehicleModelCode = leitura.nextLine();
 
                 List<Year> vehicleYearList = modelMapper.jsonToModel(context.getYear(vehicleBrandCode, vehicleModelCode), new TypeReference<>() {
                 });
