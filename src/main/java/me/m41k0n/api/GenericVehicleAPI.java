@@ -8,9 +8,9 @@ import java.net.http.HttpClient;
 public class GenericVehicleAPI implements VehicleAPI {
     private final VehicleType vehicleType;
 
-    HttpClient httpClient = HttpClient.newHttpClient();
-    APIConsume apiConsume = new APIConsume(httpClient);
-    String baseUrl = "https://parallelum.com.br/fipe/api/v1/";
+    private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final APIConsume apiConsume = new APIConsume(httpClient);
+    private final String baseUrl = "https://parallelum.com.br/fipe/api/v1/";
 
     public GenericVehicleAPI(VehicleType vehicleType) {
         this.vehicleType = vehicleType;
