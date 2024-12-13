@@ -38,5 +38,7 @@ git clone https://github.com/M41k0n-Mk/consulta-tabela-fipe.git
 
 cd consulta-tabela-fipe
 
-mvn spring-boot:run
+mvn clean package
+
+java -jar .\target\consulta-tabela-fipe-1.0-SNAPSHOT.jar
 ```
