@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+MANIFEST.MF
+dependency-reduced-pom.xml
