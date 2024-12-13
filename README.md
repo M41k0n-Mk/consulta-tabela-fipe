@@ -25,7 +25,7 @@ _This project was developed as part of a challenge proposed by the instructors f
 • Applied sanitization to user inputs, ensuring that the application receives the expected type without leading or trailing whitespace and other string malformations.
 
 ## Technologies I used to build this project:
-[![](https://img.icons8.com/fluency/48/java-coffee-cup-logo.png)](https://www.java.com/en/)[![](https://img.icons8.com/color/48/spring-logo.png)](https://spring.io/)[![](https://img.icons8.com/ios/50/maven-ios.png)](https://maven.apache.org/)[![](https://img.icons8.com/fluency/48/intellij-idea.png)](https://www.jetbrains.com/pt-br/idea/)[![](https://img.icons8.com/glyph-neue/50/github.png)](https://github.com/)
+[![](https://img.icons8.com/fluency/48/java-coffee-cup-logo.png)](https://www.java.com/en/)[![](https://img.icons8.com/ios/50/maven-ios.png)](https://maven.apache.org/)[![](https://img.icons8.com/fluency/48/intellij-idea.png)](https://www.jetbrains.com/pt-br/idea/)[![](https://img.icons8.com/glyph-neue/50/github.png)](https://github.com/)
 
 
 ## Before running the application:
