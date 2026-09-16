@@ -5,8 +5,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class APIConsume {
+    private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(10);
+
     private final HttpClient client;
 
     public APIConsume(HttpClient client) {
@@ -16,6 +19,7 @@ public class APIConsume {
     public String getData(String url) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .timeout(REQUEST_TIMEOUT)
                 .build();
         HttpResponse<String> response;
 
