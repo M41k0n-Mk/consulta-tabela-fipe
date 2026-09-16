@@ -1,6 +1,11 @@
 package me.m41k0n;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+
 import me.m41k0n.api.GenericVehicleAPI;
 import me.m41k0n.api.VehicleAPI;
 import me.m41k0n.context.VehicleContext;
@@ -12,17 +17,13 @@ import me.m41k0n.model.Year;
 import me.m41k0n.service.ModelMapper;
 import me.m41k0n.utils.InputSanitizer;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         ModelMapper modelMapper = new ModelMapper();
+        var leitura = new Scanner(System.in);
 
         while (true) {
             System.out.println("Escolha o tipo do seu veículo(carros, caminhões ou motos) ou digite sair para sair da aplicação:");
-            var leitura = new Scanner(System.in);
             var vehicleType = leitura.nextLine();
 
             if (vehicleType.equals("sair"))

@@ -17,7 +17,7 @@ public enum VehicleType {
 
     public static VehicleType fromString(String type) {
         for (VehicleType vehicleType : VehicleType.values()) {
-            if (vehicleType.getType().contains(type)) {
+            if (vehicleType.getType().equals(type)) {
                 return vehicleType;
             }
         }
